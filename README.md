@@ -3,6 +3,34 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+### Results
+Video of the simulated car in the track is [in home directory](output.mp4)
+
+## PID Modules:
+# P - Proportion
+* Car steers in proportion to the CTE(Cross Track Error). CTE is a measurement to know how far the car is away from the middle line of the road.
+	* The car steers right when the car is going left of the middle line
+	* The car steers left when the car is going right of the middle line
+	* The more the car that is away from the middle line, higher the steering angle. If the Proportional(P) coefficient is High, the car is going to oscillate a lot, as the car will constantly overcorrect and overshoot . If the coefficient is too low, the car may react too slowly to curves when the car gets off-center with a higher CTE.
+
+# I - Integral
+* It sums up all the CTEs. If the integral is negative, the car has been moving left and inorder to bring it back it has to steer to the right. 
+	* Higher value for the coefficient of I will cause quicker oscillations
+	* Lower value for the coefficient of I will cause the vehicle to drift
+
+# D - Differential
+* It is the derivative of the CTE function. Car will quickly steers if the derivatives change faster(In case of a big curve).
+	* If the car is moving away from the middle, this will cause the steering to get larger similar to proportion, but if the car is moving closer to the middle (negative derivative), the car's steering angle will get smoothed out, leading to a more smoother driving experience.
+	* Higher value of coefficient tends the car to go without much oscillations. 
+	* Lower Valur for the coefficient will make the car oscillate a lot.
+
+### Coefficient adjustment
+* I started with close to zero values for steering angle , throttle to be a constant, and adjusted them according to its performance. I initially set the value of th I,D coefficients to close to zero. Set a value for P to start with, There were a lot of iterations where the car just goes and crashes. There were about 15-20 iterations to get it right. 
+
+* Final values (0.1, 0.00001, 2) seemed to work pretty decently.
+
+
+
 ## Dependencies
 
 * cmake >= 3.5
